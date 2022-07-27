@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4-2 while 반복문</title>
+    <script>
+      let b = 0;
+      while (confirm("계속 진행하시겠습니까?")) {
+        alert(`${b}번째 반복입니다.`);
+        b += 1;
+      }
+
+      let a = 0;
+      const array = [1, 2, 3, 4, 5];
+
+      while (a < array.length) {
+        console.log(`${a} : ${array[a]}`);
+        a++;
+      }
+
+      let i = 1;
+      while (true) {
+        alert(`${i}번째 반복입니다.`);
+        i++;
+        break;
+        // break 키워드는 switch 조건문이나 반복문을 벗어날 때 사용하는 키워드다. while 반복문의 조건이 항상 참이어서 무한 반복하게 된다면 break 키워드를 사용해야 벗어날 수 있다.
+      }
+
+      for (let i = 0; true; i++) {
+        alert(i + "번째 반복문입니다.");
+
+        const isContinue = confirm("계속 하시겠습니까?");
+        if (!isContinue) {
+          break;
+        }
+      }
+
+      alert("프로그램 종료");
+
+      for (let i = 0; i < 5; i++) {
+        continue;
+        alert(i);
+        // continue로 인해 반복 작업을 멈춰서 alert(i)라는 문장을 실행시키지 않고 for (~)이 있는 처음으로 돌아가며, 이어서 다음 순서의 반복 작업을 진행한다.
+      }
+
+      let output = 0;
+
+      for (let i = 1; i <= 10; i++) {
+        if (i % 2 === 1) {
+          continue;
+        }
+        output += i;
+      }
+
+      alert(output);
+    </script>
+  </head>
+  <body></body>
+</html>

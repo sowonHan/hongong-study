@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4-2 중첩반복문 피라미드</title>
+    <script>
+      let output = "";
+
+      for (let i = 1; i < 10; i++) {
+        for (let o = 0; o < i; o++) {
+          output += "*";
+        }
+        output += "\n";
+      }
+
+      console.log(output);
+      console.log("============================================");
+
+      let result = "";
+
+      for (let i = 1; i < 15; i++) {
+        for (let j = 15; j > i; j--) {
+          // j 는 14부터 시작해도 됨. 그냥 더 깔끔한 코드를 위해 15로 한 것 같음
+          result += " ";
+        }
+        for (let k = 0; k < 2 * i - 1; k++) {
+          result += "*";
+        }
+        result += "\n";
+      }
+
+      console.log(result);
+    </script>
+  </head>
+  <body></body>
+</html>
