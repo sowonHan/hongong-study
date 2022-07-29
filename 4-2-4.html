@@ -39,6 +39,27 @@
         output += "\n";
       }
 
+      // 저자가 인강에서 작성한 코드 기반으로 수정한 코드
+      for (let i = 0; i < size; i++) {
+        for (let k = 0; k < size - i; k++) {
+          output += " ";
+        }
+        for (let j = 0; j < 2 * i - 1; j++) {
+          output += "*";
+        }
+        output += "\n";
+      }
+
+      for (let i = 0; i < size + 1; i++) {
+        for (let k = 0; k < i; k++) {
+          output += " ";
+        }
+        for (let j = 0; j < 2 * (size - i) - 1; j++) {
+          output += "*";
+        }
+        output += "\n";
+      }
+
       console.log(output);
     </script>
   </head>

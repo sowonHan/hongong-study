@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5-1절 함수</title>
+    <script>
+      // 익명 함수
+      const 함수1 = function () {
+        console.log("함수 내부의 코드입니다 1");
+        console.log("함수 내부의 코드입니다 2");
+        console.log("함수 내부의 코드입니다 3");
+        console.log("");
+      };
+
+      함수1();
+      함수1();
+
+      console.log(typeof 함수1);
+      console.log(함수1);
+      // ↑ 함수에 넣어놓은 코드를 콘솔로 볼 수 있다.
+
+      // 선언적 함수
+      function 함수2() {
+        console.log("함수 내부의 코드입니다 1");
+        console.log("함수 내부의 코드입니다 2");
+        console.log("함수 내부의 코드입니다 3");
+        console.log("");
+      }
+
+      함수2();
+      함수2();
+
+      console.log(typeof 함수2);
+      console.log(함수2);
+      // 선언적 함수는 콘솔로그에 찍어봤을 때 함수 이름 '함수2'가 같이 출력된다
+
+      // 매개변수와 리턴값이 있는 함수
+      function f(x) {
+        return x * x;
+      }
+
+      console.log(f(3));
+    </script>
+  </head>
+  <body></body>
+</html>

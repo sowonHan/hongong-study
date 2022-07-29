@@ -15,7 +15,27 @@
         output += "\n";
       }
 
+      // 저자가 인강에서 만든 코드
+      for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < i + 1; j++) {
+          output += "*";
+        }
+        output += "\n";
+      }
+
       console.log(output);
+      console.log("============================================");
+
+      // 홀수 단면 피라미드
+      let output22 = "";
+
+      for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 2 * i + 1; j++) {
+          output += "*";
+        }
+        output += "\n";
+      }
+
       console.log("============================================");
 
       let result = "";
@@ -26,6 +46,18 @@
           result += " ";
         }
         for (let k = 0; k < 2 * i - 1; k++) {
+          result += "*";
+        }
+        result += "\n";
+      }
+
+      // 저자가 인강에서 작성한 코드 기반으로 수정한 코드
+      for (let i = 0; i < 14; i++) {
+        for (let k = 0; k < 13 - i; k++) {
+          result += " ";
+        }
+
+        for (let j = 0; j < 2 * i + 1; j++) {
           result += "*";
         }
         result += "\n";
