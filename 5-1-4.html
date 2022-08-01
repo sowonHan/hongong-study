@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5-1절</title>
+    <script>
+      // 전개 연산자 : 배열의 요소 하나하나를 전개해서 함수의 매개변수로 전달해주는 연산자. '...배열'의 형태
+      function sample(...items) {
+        console.log(items);
+      }
+
+      const array = [1, 2, 3, 4];
+
+      console.log("# 전개 연산자를 사용하지 않는 경우");
+      sample(array); // [[1,2,3,4]]
+
+      console.log("# 전개 연산자를 사용한 경우");
+      sample(...array); // [1,2,3,4]
+
+      // 전개 연산자가 없던 이전 버전의 자바스크립트에서는 이때 apply() 함수를 사용해서 전개했다.
+      console.log("#구 버전 자바스크립트");
+      sample.apply(null, array);
+
+      console.log("=================================");
+
+      // 기본 매개변수 : 매개변수에 기본값을 지정하는 것
+      function earnings(name, wage = 8590, hours = 40) {
+        console.log(`${name} 님의 급여 정보`);
+        console.log(`- 시급: ${wage}원`);
+        console.log(`- 근무 시간: ${hours}시간`);
+        console.log(`- 급여 ${wage * hours}원`);
+        console.log("");
+      }
+
+      earnings("구름");
+      earnings("별", 10000);
+      earnings("인성", 10000, 52);
+
+      console.log("=================================");
+
+      // 구 버전 자바스크립트로 기본 매개변수 구현하기
+      function earningsPast1(wage, hours) {
+        wage = typeof wage != undefined ? wage : 8590;
+        hours = typeof hours != undefined ? hours : 52;
+
+        return wage * hours;
+      }
+
+      function earningsPast2(wage, hours) {
+        wage = wage || 8590;
+        hours = hours || 52;
+
+        return wage * hours;
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

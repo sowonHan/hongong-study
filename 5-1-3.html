@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5-1절 최솟값 함수 만들어보기</title>
+    <script>
+      // 최솟값을 구하는 함수
+      function min(array) {
+        let result = array[0];
+
+        for (const item of array) {
+          // 최댓값은 <
+          if (result > item) {
+            result = item;
+          }
+        }
+
+        return result;
+      }
+
+      const testArray = [52, 273, 32, 103, 275, 24, 57];
+      console.log(`${testArray}중에서`);
+      console.log(`최솟값 = ${min(testArray)}`);
+
+      console.log("===================================");
+
+      // 가변 매개변수 함수 : 호출할 때 매개변수의 개수가 고정적이지 않은 함수
+      // 나머지 매개변수 : 매개변수들을 배열로 만듦. '...나머지 매개변수'의 형태
+      function sample(...items) {
+        console.log(items);
+      }
+
+      sample(1, 2);
+      sample(1, 2, 3);
+      sample(1, 2, 3, 4);
+
+      console.log("===================================");
+
+      // 가변 매개변수를 사용한 min 함수
+      function minAnother(...items) {
+        let number = items[0];
+
+        for (const item of items) {
+          if (number > item) {
+            number = item;
+          }
+        }
+
+        return number;
+      }
+
+      console.log("minAnother(52, 273, 32, 103, 275, 24, 57)");
+      console.log(`= ${minAnother(52, 273, 32, 103, 275, 24, 57)}`);
+
+      console.log("===================================");
+
+      // 구 버전 자바스크립트에서 가변 매개변수 함수 비슷하게 구현하기
+      // arguments 변수는 매개변수와 관련된 여러 정보를 확인할 수 있고 배열과 비슷하게 사용할 수 있다.
+      function samplePast() {
+        console.log(arguments);
+
+        for (let i = 0; i < arguments.length; i++) {
+          console.log(`${i}번째 요소: ${arguments[i]}`);
+        }
+      }
+
+      samplePast(1, 2);
+      samplePast(1, 2, 3);
+      samplePast(1, 2, 3, 4);
+
+      console.log("===================================");
+
+      // 일반 매개변수와 나머지 매개변수를 모두 갖는 함수
+      function sampleMix(a, b, ...c) {
+        console.log(a, b, c);
+      }
+
+      sampleMix(1, 2); // 1 2 []
+      sampleMix(1, 2, 3); // 1 2 [3]
+      sampleMix(1, 2, 3, 4); // 1 2 [3, 4]
+      sampleMix([1, 2, 3, 4]); // [1, 2, 3, 4] undefined []
+
+      console.log("===================================");
+
+      function minOther(first, ...rests) {
+        let output;
+        let items;
+
+        // Array.isArray() : 어떤 자료가 배열인지 확인하는 메소드. 배열이면 true, 아니면 false를 출력한다. typeof 연산자로 배열을 확인하면 object라고 떠서 정확하지 않음.
+        if (Array.isArray(first)) {
+          output = first[0];
+          items = first;
+        } else if (typeof first === "number") {
+          output = first;
+          items = rests;
+        }
+
+        for (const item of items) {
+          if (output > item) {
+            output = item;
+          }
+        }
+
+        return output;
+      }
+
+      console.log(
+        `minOther(배열): ${minOther([52, 273, 32, 103, 275, 24, 57])}`
+      );
+      console.log(
+        `minOther(숫자, ...): ${minOther(52, 273, 32, 103, 275, 24, 57)}`
+      );
+    </script>
+  </head>
+  <body></body>
+</html>

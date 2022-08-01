@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5-1절 확인 문제</title>
+    <script>
+      // A부터 B까지 범위 안의 숫자를 모두 곱하기
+      const multiplyAll = (a, b) => {
+        let result = 1;
+
+        for (let i = a; i <= b; i++) {
+          result *= i;
+        }
+
+        return result;
+      };
+
+      console.log(`1-1 : ${multiplyAll(1, 2)}`);
+      console.log(`1-2 : ${multiplyAll(1, 3)}`);
+      console.log("==================================");
+
+      // 최댓값을 찾는 함수1 - 매개변수가 배열
+      const maxArray = function (array) {
+        let output = array[0];
+
+        for (const item of array) {
+          if (output < item) {
+            output = item;
+          }
+        }
+
+        return output;
+      };
+
+      console.log(`2-1 매개변수가 배열 : ${maxArray([1, 2, 3, 4])}`);
+      console.log("==================================");
+
+      // 최댓값을 찾는 함수2 - 매개변수가 숫자
+      const maxNumber = (...array) => {
+        let output = array[0];
+
+        for (const item of array) {
+          if (output < item) {
+            output = item;
+          }
+        }
+
+        return output;
+      };
+
+      console.log(`2-2 매개변수가 숫자 : ${maxNumber(1, 2, 3, 4)}`);
+      console.log("==================================");
+
+      // 최댓값을 찾는 함수3 - 매개변수에 배열과 숫자 모두 가능
+      const maxBoth = (one, ...data) => {
+        let output;
+        let items;
+
+        if (Array.isArray(one)) {
+          output = one[0];
+          items = one;
+        } else if (typeof one === "number") {
+          output = one;
+          items = data;
+        }
+
+        for (const item of items) {
+          if (output < item) {
+            output = item;
+          }
+        }
+
+        return output;
+      };
+
+      console.log(`2-3 매개변수 불특정 - 배열 : ${maxBoth([1, 2, 3, 4])}`);
+      console.log(`2-3 매개변수 불특정 - 숫자 : ${maxBoth(1, 2, 3, 4)}`);
+    </script>
+  </head>
+  <body></body>
+</html>

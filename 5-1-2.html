@@ -26,6 +26,8 @@
       //   return (year % 4 === 0) && (year % 100 !== 0) || (year % 400 === 0)
       // }
 
+      // 자동으로 올해가 윤년인지 확인하려면 매개변수를 year = new Date().getFullYear() 로 기본 매개변수로 설정해둔다
+
       console.log(`2020년은 윤년일까? === ${isLeapYear(2020)}`);
       console.log(`2022년은 윤년일까? === ${isLeapYear(2022)}`);
       console.log(`2010년은 윤년일까? === ${isLeapYear(2010)}`);
