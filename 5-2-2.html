@@ -17,7 +17,9 @@
 
       setTimeout(() => {
         console.log("타이머를 종료합니다.");
-        // clearInterval과 claerTimeout의 매개변수에는 타이머 ID가 들어가는데, 이는 ,setInterval과 setTimeout 함수를 호출할 때 리턴값으로 나오는 숫자다
+        /* clearInterval과 claerTimeout의 매개변수에는 타이머 ID가 들어가는데, 이는 ,setInterval과 setTimeout 함수를 호출할 때 리턴값으로 나오는 숫자다.
+        저자 유튜브 강의 답변 : 타이머를 걸면 타이머 아이디가 (웹 브라우저에 따라서 미세하게 다를 수 있지만) 1부터 차근차근 올라갑니다. 이 값이 들어있는 것입니다.
+        https://developer.mozilla.org/ko/docs/Web/API/setTimeout 의 반환값이 해당 설명 */
         clearInterval(id);
       }, 5 * 1000);
     </script>
