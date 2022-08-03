@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5-2절 변수 충돌 방지</title>
+    <script>
+      // 스코프 : 변수가 존재하는 범위
+      // 블록 : script 태그 또는 함수 등으로 구분되는 공간
+      // 블록과 함수 블록을 사용해 스코프를 조절해 변수 충돌을 해결하기
+      let pi = 3.14;
+      console.log(`파이 값은 ${pi}입니다.`);
+
+      {
+        let pi = 3.141592;
+        console.log(`파이 값은 ${pi}입니다.`);
+      }
+
+      function sample() {
+        let pi = 3.1415;
+        console.log(`파이 값은 ${pi}입니다.`);
+      }
+      sample();
+      console.log(`파이 값은 ${pi}입니다.`); // 맨 위의 pi로 인식
+
+      // 함수를 만들자마자 즉시 호출하는 즉시 호출 함수를 사용
+      // (함수)()의 형태
+      (function () {
+        "use strict";
+        // ↑ 코드를 엄격하게 검사하도록 엄격 모드를 적용시키는 문자열. 즉시 호출 함수를 만들고 블록 가장 위쪽에 엄격 모드를 적용하는 경우가 많다. 이렇게 하면 해당 블록 내부에만 엄격 모드가 적용된다.
+        let pi = 3.1;
+        console.log(`파이 값은 ${pi}입니다.`);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>

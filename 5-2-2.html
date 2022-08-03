@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5-2절 콜백 함수2</title>
+    <script>
+      // 특정 시간마다, 혹은 특정 시간 이후에 콜백 함수를 호출하는 타이머 함수
+      let id;
+      let count = 0;
+
+      id = setInterval(() => {
+        console.log(`1초마다 실행됩니다(${count}번째)`);
+        count++;
+      }, 1 * 1000); // 1초임을 쉽게 볼 수 있게 숫자 연산자로 표현했고 그냥 1000으로 입력해도 됨
+
+      setTimeout(() => {
+        console.log("타이머를 종료합니다.");
+        // clearInterval과 claerTimeout의 매개변수에는 타이머 ID가 들어가는데, 이는 ,setInterval과 setTimeout 함수를 호출할 때 리턴값으로 나오는 숫자다
+        clearInterval(id);
+      }, 5 * 1000);
+    </script>
+  </head>
+  <body></body>
+</html>

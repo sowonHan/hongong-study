@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5-2절 콜백함수1</title>
+    <script>
+      function callThreeTimes(callback) {
+        for (let i = 0; i < 3; i++) {
+          callback(i);
+        }
+      }
+
+      function print(i) {
+        console.log(`${i}번째 함수 호출`);
+      }
+
+      callThreeTimes(print);
+
+      console.log("======================================");
+
+      // 자바스크립트가 제공하는 함수 중 콜백 함수를 활용하는 함수들
+      // 1. forEach() - 배열이 갖고있는 함수1. 배열 내부 요소를 활용하여 콜백 함수를 호출해준다.
+      const numbers = [273, 52, 103, 32, 57];
+
+      numbers.forEach(function (value, index, array) {
+        console.log(`${index}번째 요소 : ${value}`);
+      });
+
+      console.log("======================================");
+
+      // 2. map() - 배열이 갖고있는 함수2. 콜백 함수에서 리턴한 값들을 기반으로 새로운 배열을 만드는 함수
+      let numbers2 = [273, 52, 103, 32, 57];
+
+      numbers2 = numbers2.map(function (value, index, array) {
+        return value * value;
+      });
+
+      numbers2.forEach(console.log);
+      // 매개변수로 console.log 자체를 넘기면 value index array 순으로 각 요소가 하나씩 콘솔에 출력된다. 왜 되는지는...모르겠음...찾아보니까 일부 브라우저에서 지원하는 것 같고 잘못된 값이 유도될 수 있어서 별로 권장하지는 않는 듯? 포럼에 왜 이렇게 안 쓰는지 물어보는 글은 오래된 게시글로 있는데 내가 이해를 못함
+
+      console.log("======================================");
+
+      // 3. filter() - 배열이 갖고있는 함수3. 콜백 함수에서 리턴하는 값이 true인 것만 모아서 새로운 배열을 만드는 함수
+      const numbers3 = [0, 1, 2, 3, 4, 5];
+      const evenNumbers = numbers3.filter(function (value) {
+        return value % 2 === 0;
+      });
+
+      console.log(`원래 배열 : ${numbers3}`);
+      console.log(`짝수만 추출 : ${evenNumbers}`);
+
+      console.log("======================================");
+
+      // 화살표 함수 사용
+      let numbers4 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+      numbers4
+        .filter((value) => value % 2 === 0)
+        .map((value) => value * value)
+        .forEach((value) => {
+          console.log(value);
+        });
+      // ↑ 메소드 체이닝 : 어떤 메소드가 리턴하는 값을 기반으로 해서 함수를 줄줄이 사용하는 것
+    </script>
+  </head>
+  <body></body>
+</html>
