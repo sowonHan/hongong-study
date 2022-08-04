@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6-2절 익명함수와 화살표 함수의 차이</title>
+    <script>
+      const test = {
+        a: function () {
+          console.log(this);
+        },
+        b: () => {
+          console.log(this);
+        },
+      };
+
+      test.a(); // object -> test 객체가 나옴
+      test.b(); // window 객체(웹 브라우저 자체)가 나옴
+      // 이처럼 this 키워드의 의미가 달라지므로 화살표 함수를 메소드로 사용하지 않는다.
+
+      const object = {
+        ko: "빵",
+        en: "bread",
+        fr: "pain",
+        es: "pan",
+        lang: {
+          ko: "한국어",
+          en: "영어",
+          fr: "프랑스어",
+          es: "스페인어",
+        },
+        print: function (lang) {
+          console.log(`${this.ko}는 ${this.lang[lang]}로 ${this[lang]}입니다.`);
+        },
+        // 알아서 property와 parameter로 잘 구분해주네
+      };
+
+      object.print("es"); // 문자열로 안 넣으면 undefined 되니까 매개변수 잘 넣어야겠다
+    </script>
+  </head>
+  <body></body>
+</html>
