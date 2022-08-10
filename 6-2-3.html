@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6-2절 Math객체로 랜덤한 숫자 만들기</title>
+    <script>
+      const num = Math.random();
+      // Math.random() : 0 이상, 1 미만의 랜덤한 숫자를 생성하는 메소드
+
+      console.log("# 랜덤한 숫자");
+      console.log("0-1 사이의 랜덤한 숫자 : ", num);
+      console.log("");
+
+      console.log("# 랜덤한 숫자 범위 확대");
+      console.log("0~10 사이의 랜덤한 숫자 : ", num * 10);
+      console.log("0~50 사이의 랜덤한 숫자 : ", num * 50);
+      console.log("");
+
+      console.log("# 랜덤한 숫자 범위 이동");
+      console.log("-5~5 사이의 랜덤한 숫자 : ", num * 10 - 5);
+      console.log("-25~25 사이의 랜덤한 숫자 : ", num * 50 - 25);
+      console.log("");
+
+      console.log("# 랜덤한 정수 숫자");
+      console.log("-5~5 사이의 랜덤한 정수 숫자 : ", Math.floor(num * 10 - 5));
+      console.log(
+        "-25~25 사이의 랜덤한 정수 숫자 : ",
+        Math.floor(num * 50 - 25)
+      );
+      // Math.floor() : 소숫값이 존재할 때 소숫값을 버리는 메소드 (내림)
+      // 올림 메소드는 Math.ceil(), 반올림 메소드는 Math.round()
+    </script>
+  </head>
+  <body></body>
+</html>

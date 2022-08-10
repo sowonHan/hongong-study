@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6-2절 확인문제</title>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script>
+      // 2번 문제
+      function printLang(code) {
+        return printLang._lang[code];
+      }
+
+      printLang._lang = {
+        ko: "한국어",
+        en: "영어",
+        ja: "일본어",
+        fr: "프랑스어",
+        es: "스페인어",
+      };
+
+      console.log('printLang("ko") : ', printLang("ko"));
+      console.log('printLang("en") : ', printLang("en"));
+      console.log("=======================");
+
+      // 3번 문제
+      const degree = 90;
+
+      console.log(`사인 90도의 값은 ${Math.sin((degree * Math.PI) / 180)}`);
+      console.log("=======================");
+
+      // 5번 문제
+      const books = [
+        {
+          name: "혼자 공부하는 파이썬",
+          price: 18000,
+          publisher: "한빛미디어",
+        },
+        {
+          name: "HTML5 웹 프로그래밍 입문",
+          price: 26000,
+          publisher: "한빛아카데미",
+        },
+        {
+          name: "머신러닝 딥러닝 실전 개발 입문",
+          prie: 30000,
+          publisher: "위키북스",
+        },
+        {
+          name: "딥러닝을 위한 수학",
+          price: 25000,
+          publisher: "위키북스",
+        },
+      ];
+
+      const result = _.orderBy(books, ["name"]);
+      console.log(result);
+    </script>
+  </head>
+  <body></body>
+</html>
