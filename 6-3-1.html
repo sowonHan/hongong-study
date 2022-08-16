@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6-3절 객체의 속성 존재 여부 확인하기</title>
+    <script>
+      const object = {
+        name: "혼자 공부하는 자바스크립트",
+        price: 18000,
+        publisher: "한빛미디어",
+      };
+
+      // 객체에 없는 속성에 접근하면 undefined 자료형이 나온다. 이를 활용해 조건문으로 속성의 존재 여부를 확인할 수 있다
+      if (object.name !== undefined) {
+        console.log("name 속성이 있습니다.");
+      } else {
+        console.log("name 속성이 없습니다.");
+      }
+
+      // undefined가 false로 변환되는 값이므로 아래도 같이 간단하게 많이 쓴다
+      // 객체의 특성 속성이 undefined 외 false로 변환될 수 있는 값(0, false, 빈 문자열, null, NaN)으로 들어오지 않을 거라는 전제 하에만 사용 가능하다
+      if (object.name) {
+        console.log("name 속성이 있습니다.");
+      } else {
+        console.log("name 속성이 없습니다.");
+      }
+
+      if (object.author !== undefined) {
+        console.log("author 속성이 있습니다.");
+      } else {
+        console.log("author 속성이 없습니다.");
+      }
+
+      if (object.author) {
+        console.log("author 속성이 있습니다.");
+      } else {
+        console.log("author 속성이 없습니다.");
+      }
+
+      // 더 짧게는 다음과도 같은 조건문을 사용해서 다른 코드에 활용할 수 있다
+      object.name || console.log("name 속성이 없습니다.");
+      object.name || console.log("author 속성이 없습니다.");
+
+      // 삼항연산자로 기본 속성 지정하기
+      object.name = object.name !== undefined ? object.name : "제목 미정";
+      object.author = object.author !== undefined ? object.author : "저자 미상";
+
+      // 아래와 같이 짧은 조건문으로 많이 구현한다
+      object.name = object.name || "제목 미정";
+      object.author = object.author || "저자 미상";
+
+      console.log(JSON.stringify(object, null, 2));
+    </script>
+  </head>
+  <body></body>
+</html>
