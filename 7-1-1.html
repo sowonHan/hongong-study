@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>7-1절 문서 객체 조작하기</title>
+    <title>7-1절 문서 객체 조작하기1</title>
     <script>
       // 자바스크립트에서 칭하는 '문서 객체' = HTML에서의 '요소'(html, head, body, div, h1 등 태그)
 
@@ -20,6 +20,7 @@
       // document.body, document.head, document.title 같은 속성은 웹 브라우저의 자바스크립트가 당연히 있을 거라 전제하고 알아서 만든 것. 우리가 head와 body 요소 내부에 만들어놓은 다른 요소들은 document.querySelector(CSS선택자), document.querySelectorAll(CSS선택자)를 사용해서 접근 가능하다.
       document.addEventListener("DOMContentLoaded", () => {
         const header = document.querySelector("h2");
+        // querySelector는 조건에 맞는 문서객체 중 가장 첫 번째 것만 선택한다.
 
         header.textContent = "HEADER";
         header.style.color = "white";
@@ -39,6 +40,14 @@
           header.style.backgroundColor = "red";
           header.style.padding = "10px";
         });
+
+        // 위 코드는 for of 반복문 사용해도 된다 (4-2-1 참고) 근데 인덱스와 값을 편하게 가져다 쓰려면 아무래도 forEach가 훨씬 편한 듯. 7-1-2 코드의 경우 안 되는 이유를 유튜브 댓글 + 직접 해보고 써놨음
+        for (const element of document.querySelectorAll("h3")) {
+          element.textContent = "HEADERS";
+          element.style.color = "white";
+          element.style.backgroundColor = "red";
+          element.style.padding = "10px";
+        }
       });
     </script>
   </head>

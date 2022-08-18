@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7-1절 이벤트 설정하기</title>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        let counter = 0;
+        // 이벤트 리스너가 여러 번 연결되지 않도록 상태 확인하는 변수 생성
+        let isConnect = false;
+
+        const h1 = document.querySelector("h1");
+        const p = document.querySelector("p");
+        const connectButton = document.querySelector("#connect");
+        const disconnectButton = document.querySelector("#disconnect");
+
+        // 단순히 클릭 이벤트 연결만 했을 때 사용한 코드
+        // h1.addEventListener("click", (event) => {
+        //   counter++;
+        //   h1.textContent = `클릭 횟수 : ${counter}`;
+        // });
+
+        // 이벤트를 제거하려면, 이벤트 리스너를 변수 또는 상수로 가지고 있어야 한다.
+        const listener = (event) => {
+          h1.textContent = `클릭 횟수 : ${counter++}`;
+        };
+        // 매개변수 event : 자바스크립트는 사용할 경우에만 매개 변수를 넣으면 됩니다. 내부적으로는 첫 번째 매개 변수로 데이터가 전달되지만, 필요 없으면 받을 필요가 없으므로 안 적어도 됩니다. 매개변수에는 "이벤트와 관련된 정보들"이 들어옵니다. 해당 문서 객체는 이후 강의에 나오지만 event.currentTarget으로 추출 가능합니다.
+
+        connectButton.addEventListener("click", () => {
+          if (isConnect === false) {
+            h1.addEventListener("click", listener);
+            p.textContent = "이벤트 연결 상태 : 연결";
+            isConnect = true;
+          }
+        });
+
+        disconnectButton.addEventListener("click", () => {
+          if (isConnect === true) {
+            h1.removeEventListener("click", listener);
+            p.textContent = "이벤트 연결 상태 : 해제";
+            isConnect = false;
+          }
+        });
+      });
+    </script>
+    <style>
+      h1 {
+        /* 해당 태그를 마우스로 드래그하지 못하게 하는 스타일 설정. 클릭을 여러 번 했을 때 글자가 선택되는 것을 막기 위한 것. */
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>클릭 횟수 : 0</h1>
+    <button id="connect">이벤트 연결</button>
+    <button id="disconnect">이벤트 제거</button>
+    <p>이벤트 연결 상태 : 해제</p>
+  </body>
+</html>

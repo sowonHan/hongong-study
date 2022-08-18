@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7-1절 문서 객체 생성, 추가, 이동, 제거</title>
+    <script>
+      // 문서 객체 생성해서 추가하기
+      document.addEventListener("DOMContentLoaded", () => {
+        // 문서객체 생성하기
+        const header = document.createElement("h2");
+
+        // 생성한 문서객체를 조작하기
+        header.textContent = "문서 객체 동적으로 생성하기";
+        header.setAttribute("data-custom", "사용자 정의 속성");
+        header.style.color = "white";
+        header.style.backgroundColor = "skyblue";
+
+        // 생성하고 조작한 문서객체를 body 태그 아래에 추가하기
+        document.body.appendChild(header);
+      });
+
+      /* 문서 객체 이동하기
+      문서 객체의 부모는 무조건 하나이므로, 문서 객체를 다른 문서 객체에 추가시키면 이동하는 결과가 되는 것. */
+      document.addEventListener("DOMContentLoaded", () => {
+        // 문서 객체 읽어들이기
+        const divA = document.querySelector("#first");
+        const divB = document.querySelector("#second");
+
+        // 문서 객체 생성하기
+        const h1 = document.createElement("h1");
+        h1.textContent = "이동하는 h1 태그";
+        h1.style.color = "red";
+
+        // 이동시키기 위해 서로 번갈아가면서 실행하는 함수를 구현
+        const toFirst = () => {
+          divA.appendChild(h1);
+          setTimeout(toSecond, 1000);
+        };
+        const toSecond = () => {
+          divB.appendChild(h1);
+          setTimeout(toFirst, 1000);
+        };
+        toFirst();
+      });
+
+      // 유튜브에서 알려준 2번째 방법
+      document.addEventListener("DOMContentLoaded", () => {
+        const header = document.createElement("h2");
+        header.textContent = "안녕하세요";
+        const array = [
+          document.querySelector(".first"),
+          document.querySelector(".second"),
+        ];
+        let counter = 0;
+        const func = () => {
+          array[counter % 2].appendChild(header);
+          counter++;
+        };
+        setInterval(func, 1000);
+        // 이렇게 하면 처음에는 아무것도 나오지 않다가 1초 후부터 첫 번째 div 내부에 h2가 생성되어 추가된다. setInterval() 함수를 호출하기 전에 func() 함수를 강제로 호출해줘야 1번째 방법과 동일한 결과가 나온다.
+        func();
+      });
+
+      // 문서 객체 제거하기
+      document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+          // 문서 객체 읽어들이기
+          const h1 = document.querySelector("body > h1");
+
+          // h1.parentNode : h1의 부모 객체(body 태그)에 접근하는 속성
+          h1.parentNode.removeChild(h1);
+          // document.body.removeChild(h1) 이렇게 써도 된다
+        }, 3000);
+      });
+    </script>
+  </head>
+  <body>
+    <div id="first">
+      <h1>첫 번째 div 태그 내부</h1>
+    </div>
+    <hr />
+    <div id="second">
+      <h1>두 번째 div 태그 내부</h1>
+    </div>
+    <br />
+    <hr />
+    <h1>제거 대상 문서 객체</h1>
+    <hr />
+    <div class="first">
+      <h1>첫 번째 div 태그 내부</h1>
+    </div>
+    <hr />
+    <div class="second">
+      <h1>두 번째 div 태그 내부</h1>
+    </div>
+  </body>
+</html>
