@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7-2절 키보드 이벤트</title>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const textarea = document.querySelector("textarea");
+        const h1 = document.querySelector("h1");
+
+        textarea.addEventListener("keyup", (event) => {
+          const length = textarea.value.length;
+          h1.textContent = `글자 수 : ${length}`;
+        });
+      });
+      // keydown, keypress, keyup 모두 단점이 있는데 교재 332p 참고
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const h2 = document.querySelector("h2");
+        const print = (event) => {
+          let output = "";
+          output += `alt : ${event.altKey}<br />`;
+          output += `ctrl : ${event.ctrlKey}<br />`;
+          output += `shift : ${event.shiftKey}<br />`;
+          output += `code : ${
+            typeof event.code !== "undefined" ? event.code : event.keyCode
+          }<br />`;
+          // 인터넷 익스플로러와 구 버전 엣지가 code 속성을 지원하지 않기 때문에 event.code가 있는지 확인하고 있는 것.
+
+          h2.innerHTML = output;
+          console.log("code 타입 : ", typeof event.code);
+          console.log("keycode : ", event.keyCode);
+          // 이제 event.keyCode는 삭제되고 호환용으로만 남아있어서 권장하지 않는 속성
+        };
+
+        document.addEventListener("keydown", print);
+        document.addEventListener("keyup", print);
+      });
+    </script>
+  </head>
+  <body>
+    <h1></h1>
+    <textarea></textarea>
+    <h2></h2>
+  </body>
+</html>
