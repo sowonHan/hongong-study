@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7-2절 입력 양식 요소2</title>
+    <script>
+      // 입력 양식 (2) : 드롭다운 select 요소 - 1
+      document.addEventListener("DOMContentLoaded", () => {
+        const select = document.querySelector("select");
+        const p = document.querySelector("p");
+
+        select.addEventListener("change", (event) => {
+          const options = event.currentTarget.options;
+          const index = event.currentTarget.options.selectedIndex;
+
+          console.log(`options : ${options}`);
+          console.log(`index : ${index}`);
+
+          p.textContent = `선택 : ${options[index].textContent}`;
+        });
+        // https://www.javascripttutorial.net/javascript-dom/javascript-select-box/
+        // https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/options
+        // https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionsCollection
+      });
+    </script>
+  </head>
+  <body>
+    <select>
+      <option>떡볶이</option>
+      <option>순대</option>
+      <option>오뎅</option>
+      <option>튀김</option>
+    </select>
+    <!-- 초깃값으로 떡볶이를 지정 -->
+    <p>선택: 떡볶이</p>
+  </body>
+</html>
