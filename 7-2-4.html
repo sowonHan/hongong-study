@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>7-2절 입력 양식 요소2</title>
     <script>
-      // 입력 양식 (2) : 드롭다운 select 요소 - 1
+      // 입력 양식 (2) : 드롭다운 select 요소
       document.addEventListener("DOMContentLoaded", () => {
+        /* 일반 select */
         const select = document.querySelector("select");
-        const p = document.querySelector("p");
+        const p_1 = document.querySelector("p.one");
 
         select.addEventListener("change", (event) => {
           const options = event.currentTarget.options;
@@ -18,11 +19,31 @@
           console.log(`options : ${options}`);
           console.log(`index : ${index}`);
 
-          p.textContent = `선택 : ${options[index].textContent}`;
+          p_1.textContent = `선택 : ${options[index].textContent}`;
         });
         // https://www.javascripttutorial.net/javascript-dom/javascript-select-box/
         // https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/options
         // https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionsCollection
+
+        /* multiple select */
+        const select_multi = document.querySelector("select.multiple");
+
+        const p_2 = document.querySelector("p.two");
+
+        select_multi.addEventListener("change", (event) => {
+          const options = event.currentTarget.options;
+          const list = [];
+
+          // options 속성에는 forEach() 메소드가 없기 때문에 for of 반복문으로 해야 한다.
+          for (const option of options) {
+            if (option.selected) {
+              list.push(option.textContent);
+            }
+          }
+
+          p_2.textContent = `선택 : ${list.join(",")}`;
+          // join() 메서드는 배열의 모든 요소를 연결해 하나의 문자열로 만든다. 매개변수는 배열의 각 요소를 구분할 문자열을 지정한다. 생략하면 배열의 요소들이 쉼표로 구분된다. 매개변수가 빈 문자열이면 모든 요소들이 사이에 아무 문자도 없이 연결된다.
+        });
       });
     </script>
   </head>
@@ -34,6 +55,16 @@
       <option>튀김</option>
     </select>
     <!-- 초깃값으로 떡볶이를 지정 -->
-    <p>선택: 떡볶이</p>
+    <p class="one">선택: 떡볶이</p>
+    <br />
+    <hr />
+    <br />
+    <select multiple class="multiple">
+      <option>떡볶이</option>
+      <option>순대</option>
+      <option>오뎅</option>
+      <option>튀김</option>
+    </select>
+    <p class="two"></p>
   </body>
 </html>
