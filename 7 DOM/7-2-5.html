@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7-2절 여러 단위로 변환하는 프로그램</title>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        let 현재값;
+        let 변환상수 = 10;
+
+        const select = document.querySelector("select");
+        const input = document.querySelector("input");
+        const span = document.querySelector("span");
+        const p = document.querySelector("p");
+
+        const calculate = () => {
+          span.textContent = (현재값 * 변환상수).toFixed(2);
+          // toFixed() : 소수점 이하 몇 자리까지 출력하게 해주는 Number 객체 메소드. 숫자를 문자열로 변환시킨다. (교재 267p 참고)
+        };
+
+        input.addEventListener("keyup", (event) => {
+          현재값 = Number(event.currentTarget.value);
+
+          if (isNaN(현재값)) {
+            p.textContent = "숫자를 입력해주세요.";
+            p.style.color = "red";
+            return;
+          }
+
+          p.textContent = "";
+
+          calculate();
+        });
+
+        select.addEventListener("change", (event) => {
+          const options = event.currentTarget.options;
+          const index = event.currentTarget.options.selectedIndex;
+
+          변환상수 = Number(options[index].value);
+
+          calculate();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <input type="text" /> cm =
+    <span></span>
+    <select>
+      <option value="10">mm</option>
+      <option value="0.01">m</option>
+      <option value="0.393701">inch</option>
+    </select>
+    <p></p>
+  </body>
+</html>
