@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7-2절 기본 이벤트 막기</title>
+    <script>
+      // 기본 이벤트 : 어떤 이벤트가 발생했을 때 웹 브라우저가 기본적으로 처리해주는 것 (ex] 마우스 우클릭 시 컨텍스트 메뉴 출력)
+      document.addEventListener("DOMContentLoaded", () => {
+        const imgs = document.querySelectorAll("img");
+
+        // 이미지 불펌 방지로 자주 쓰이는 코드. 이미지에서만 우클릭이 안 된다.
+        imgs.forEach((img) => {
+          img.addEventListener("contextmenu", (event) => {
+            // 기본 이벤트를 제거
+            event.preventDefault();
+          });
+        });
+
+        let status = false;
+
+        const checkbox = document.querySelector("input");
+        checkbox.addEventListener("change", (event) => {
+          status = event.currentTarget.checked;
+          console.log(`현재 상태 : ${status}`);
+        });
+
+        const link = document.querySelector("a");
+        link.addEventListener("click", (event) => {
+          // status 값이 false면 기본 이벤트를 막는다.
+          if (!status) {
+            event.preventDefault();
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <img src="http://placekitten.com/300/300" alt="" />
+    <br />
+    <hr />
+    <br />
+    <input type="checkbox" />
+    <span>링크 활성화</span>
+    <br />
+    <a href="http://hanbit.co.kr">한빛미디어</a>
+  </body>
+</html>
