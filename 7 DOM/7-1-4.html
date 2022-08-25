@@ -26,7 +26,7 @@
         const listener = (event) => {
           h1.textContent = `클릭 횟수 : ${counter++}`;
         };
-        // 매개변수 event : 자바스크립트는 사용할 경우에만 매개 변수를 넣으면 됩니다. 내부적으로는 첫 번째 매개 변수로 데이터가 전달되지만, 필요 없으면 받을 필요가 없으므로 안 적어도 됩니다. 매개변수에는 "이벤트와 관련된 정보들"이 들어옵니다. 해당 문서 객체는 이후 강의에 나오지만 event.currentTarget으로 추출 가능합니다.
+        // 매개변수 event : 자바스크립트는 사용할 경우에만 매개 변수를 넣으면 된다. 내부적으로는 첫 번째 매개 변수로 데이터가 전달되지만, 필요 없으면 받을 필요가 없으므로 안 적어도 된다. 매개변수에는 "이벤트와 관련된 정보들"이 들어온다. 해당 문서 객체는 event.currentTarget으로 추출 가능하다.
 
         connectButton.addEventListener("click", () => {
           if (isConnect === false) {

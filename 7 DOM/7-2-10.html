@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>localStorage 객체</title>
+    <script>
+      // 웹 브라우저에서 제공하는 기능(웹 API) 중 웹 브라우저에 데이터를 저장하는 localStorage 객체가 있다.
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const p = document.querySelector("p");
+        const input = document.querySelector("input");
+        const button = document.querySelector("button");
+
+        // 저장된 값(객체의 속성)을 읽기(추출). localStorage.input도 가능
+        const savedValue = localStorage.getItem("input");
+
+        if (savedValue) {
+          input.value = savedValue;
+          p.textContent = `이전 실행 때의 마지막 값 : ${savedValue}`;
+        }
+
+        input.addEventListener("keyup", (event) => {
+          const value = event.currentTarget.value;
+          // 값을 저장하기. localStorage.input = value도 가능
+          localStorage.setItem("input", value);
+        });
+
+        button.addEventListener("click", (event) => {
+          // 저장된 모든 값을 제거하기. 특정 키의 값만 제거할 경우는 removeItem(키) 메소드를 사용한다.
+          localStorage.clear();
+          input.value = "";
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <p></p>
+    <button>지우기</button>
+    <input type="text" />
+  </body>
+</html>

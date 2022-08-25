@@ -5,7 +5,91 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>7-2절 할 일 목록 만들기</title>
-    <script></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const input = document.querySelector("#todo");
+        const todoList = document.querySelector("#todo-list");
+        const addButton = document.querySelector("#add-button");
+
+        // removeTodo() 함수에서 문서 객체를 쉽게 제거하기 위한 용도
+        let keyCount = 0;
+
+        const addTodo = () => {
+          // trim() : 양쪽 공백 없애는 문자열 객체 메소드 (교재 269p)
+          if (input.value.trim() === "") {
+            alert("할 일을 입력해주세요.");
+            return;
+          }
+
+          const item = document.createElement("div");
+          const checkbox = document.createElement("input");
+          const text = document.createElement("span");
+          const button = document.createElement("button");
+
+          // 문서 객체를 식별할 키를 생성한다.
+          const key = keyCount;
+          keyCount += 1;
+
+          item.setAttribute("data-key", key);
+          item.appendChild(checkbox);
+          item.appendChild(text);
+          item.appendChild(button);
+          todoList.appendChild(item);
+
+          // HTML 표준에 정의된 속성이라 setAttribute() 없이 바로 지정
+          checkbox.type = "checkbox";
+          // 체크박스를 클릭하면 선을 그어준다.
+          checkbox.addEventListener("change", (event) => {
+            item.style.textDecoration = event.target.checked
+              ? "line-through"
+              : "";
+            // 어차피 해당 css 속성이 span에만 적용돼서 item 대신 text로 객체 지정해도 결과는 똑같다.
+          });
+          // https://developer.mozilla.org/ko/docs/Web/CSS/text-decoration
+          /* event.target과 event.currentTarget 속성의 차이
+          https://webisfree.com/2017-09-06/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-event-target-%ED%94%84%EB%A1%9C%ED%8D%BC%ED%8B%B0%EC%99%80-currenttarget-%ED%94%84%EB%A1%9C%ED%8D%BC%ED%8B%B0%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90%EC%9D%80 */
+
+          text.textContent = input.value;
+
+          button.textContent = "제거하기";
+          button.addEventListener("click", () => {
+            removeTodo(key);
+          });
+
+          input.value = "";
+        };
+
+        const removeTodo = (key) => {
+          // addTodo() 함수에서 생성 및 지정한 <div data-key='숫자'></div>를 기반으로 요소를 찾아 제거한다.
+          const item = document.querySelector(`[data-key="${key}"]`);
+          todoList.removeChild(item);
+        };
+
+        // 이벤트 연결
+        addButton.addEventListener("click", addTodo);
+        input.addEventListener("keydown", (event) => {
+          // keyup 이벤트로 사용해도 동일하게 작동된다.
+          if (event.key === "Enter") {
+            addTodo();
+          }
+        });
+        // event.code로 사용하면 keypress 이벤트만 정상적으로 작동된다. keydown 이벤트를 쓰면 ㅇ을 입력했을 때 리스트가 2개로 중복돼서 추가되는 일이 생기고, keyup 이벤트를 쓰면 alert가 뜨고서 리스트가 추가된다.
+        /* event.key와 event.code의 차이
+        https://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent */
+        // 이제 keyCode 속성과 keypress 이벤트를 권장 안 하니까 바꿨음. 기존 교재 코드는 아래
+        // input.addEventListener('keyup', (event) => {
+        //   const ENTER = 13;
+        //   if (event.keyCode === ENTER) {
+        //     addTodo();
+        //   }
+        // })
+      });
+    </script>
   </head>
-  <body></body>
+  <body>
+    <h1>할 일 목록</h1>
+    <input id="todo" />
+    <button id="add-button">추가하기</button>
+    <div id="todo-list"></div>
+  </body>
 </html>
