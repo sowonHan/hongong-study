@@ -23,40 +23,40 @@
       }
 
       // 정사각형 클래스
-      // class Square {
-      //   constructor(length) {
-      //     this.length = length;
-      //   }
+      class Square1 {
+        constructor(length) {
+          this.length = length;
+        }
 
-      //   getPerimeter() {
-      //     return 4 * this.length;
-      //   }
+        getPerimeter() {
+          return 4 * this.length;
+        }
 
-      //   getArea() {
-      //     return this.length * this.length;
-      //   }
-      // }
+        getArea() {
+          return this.length * this.length;
+        }
+      }
 
       const rectangle = new Rectangle(10, 20);
-      // const square = new Square(10);
+      const square1 = new Square1(10);
       console.log(`직사각형의 둘레: ${rectangle.getPerimeter()}`);
       console.log(`직사각형의 넓이: ${rectangle.getArea()}`);
-      // console.log(`정사각형의 둘레: ${square.getPerimeter()}`);
-      // console.log(`정사각형의 넓이: ${square.getArea()}`);
+      console.log(`정사각형의 둘레: ${square1.getPerimeter()}`);
+      console.log(`정사각형의 넓이: ${square1.getArea()}`);
 
       // 클래스를 활용할 때는 편리하지만 클래스를 선언할 때는 비슷한 내용이 중복되어 복잡해졌다. 이를 해결하기 위해 나온 것이 '상속'이다.
 
       // 상속 형태 : class 자식 클래스 extends 부모 클래스
-      class Square extends Rectangle {
+      class Square2 extends Rectangle {
         constructor(length) {
           super(length, length);
           // super() 함수는 부모의 생성자 함수를 호출한다. https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/super
         }
       }
 
-      const square = new Square(10);
-      console.log(`정사각형의 둘레: ${square.getPerimeter()}`);
-      console.log(`정사각형의 넓이: ${square.getArea()}`);
+      const square2 = new Square2(10);
+      console.log(`정사각형의 둘레: ${square2.getPerimeter()}`);
+      console.log(`정사각형의 넓이: ${square2.getArea()}`);
       // Square 클래스 내에서 메소드를 선언하지 않았지만 상속받았기 때문에 사용할 수 있다.
     </script>
   </head>

@@ -22,9 +22,9 @@
       };
 
       // 교재에서 제시한 코드는 다음과 같다.
-      // function isLearYearBook (year) {
-      //   return (year % 4 === 0) && (year % 100 !== 0) || (year % 400 === 0)
-      // }
+      function isLearYearBook(year) {
+        return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+      }
 
       // 자동으로 올해가 윤년인지 확인하려면 매개변수를 year = new Date().getFullYear() 로 기본 매개변수로 설정해둔다
 

@@ -62,43 +62,45 @@
           data.color = color;
           save(data);
         });
+      });
 
-        /* 아래의 주석은 각각의 키로 설정할 때의 코드 */
+      /* 아래는 각각의 키로 설정할 때의 코드 */
 
+      document.addEventListener("DOMContentLoaded", () => {
         // 저장된 값(객체의 속성)을 읽기(추출). localStorage.key도 가능
-        // const savedValue = localStorage.getItem("key");
-        // const savedColor = localStorage.getItem("color");
+        const savedValue = localStorage.getItem("key");
+        const savedColor = localStorage.getItem("color");
 
         // if (savedValue !== null) 도 가능
-        // if (savedValue) {
-        //   input.value = savedValue;
-        //   p.textContent = `이전 실행 때의 마지막 값 : ${savedValue}`;
-        // }
+        if (savedValue) {
+          input.value = savedValue;
+          p.textContent = `이전 실행 때의 마지막 값 : ${savedValue}`;
+        }
 
-        // if (savedColor !== null) {
-        //   document.body.style.backgroundColor = savedColor;
-        //   select.value = savedColor;
-        // } else {
-        //   document.body.style.backgroundColor = "red";
-        // }
+        if (savedColor !== null) {
+          document.body.style.backgroundColor = savedColor;
+          select.value = savedColor;
+        } else {
+          document.body.style.backgroundColor = "red";
+        }
 
-        // input.addEventListener("keyup", (event) => {
-        //   const value = event.currentTarget.value;
-        //   // 값을 저장하기. localStorage.key = value도 가능
-        //   localStorage.setItem("key", value);
-        // });
+        input.addEventListener("keyup", (event) => {
+          const value = event.currentTarget.value;
+          // 값을 저장하기. localStorage.key = value도 가능
+          localStorage.setItem("key", value);
+        });
 
-        // button.addEventListener("click", () => {
-        //   // 저장된 모든 값을 제거하기. 특정 키의 값만 제거할 경우는 removeItem(키) 메소드를 사용한다.
-        //   localStorage.clear();
-        //   input.value = "";
-        // });
+        button.addEventListener("click", () => {
+          // 저장된 모든 값을 제거하기. 특정 키의 값만 제거할 경우는 removeItem(키) 메소드를 사용한다.
+          localStorage.clear();
+          input.value = "";
+        });
 
-        // select.addEventListener("change", () => {
-        //   const color = select.options[select.selectedIndex].value;
-        //   document.body.style.backgroundColor = color;
-        //   localStorage.setItem("color", color);
-        // });
+        select.addEventListener("change", () => {
+          const color = select.options[select.selectedIndex].value;
+          document.body.style.backgroundColor = color;
+          localStorage.setItem("color", color);
+        });
       });
     </script>
   </head>

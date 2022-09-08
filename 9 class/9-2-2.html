@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9-2절 private 속성, 게터, 세터</title>
+    <script>
+      // 매개변수에 음수를 넣어도 그대로 반영되는데, 길이에는 음수가 있을 수 없으므로 이 문제를 막기 위해 아래와 같이 클래스에 조건문을 추가했다.
+      class Square1 {
+        constructor(length) {
+          if (length <= 0) {
+            throw "길이는 0보다 커야 합니다.";
+          }
+          this.length = length;
+        }
+
+        getPerimeter() {
+          return 4 * this.length;
+        }
+
+        getArea() {
+          return this.length * this.length;
+        }
+      }
+
+      const square1 = new Square1(-10);
+      console.log(`정사각형의 둘레: ${square1.getPerimeter()}`);
+      console.log(`정사각형의 넓이: ${square1.getArea()}`);
+
+      // 그러나 아래와 같이 생성자로 객체를 생성한 이후에 length 속성을 변경하는 건 막을 수 없기 때문에, 이렇게 하면 음수가 다시 반영된다.
+      const square2 = new Square1(10);
+      square2.length = -10;
+      console.log(`정사각형의 둘레: ${square2.getPerimeter()}`);
+      console.log(`정사각형의 넓이: ${square2.getArea()}`);
+
+      // 이를 보완해 사용자가 클래스를 잘못 사용하는 일을 줄이고 클래스의 안정성을 확보하고자 나온 문법이 private 속성과 메소드.
+
+      class Square2 {
+        // private 속성은 생성자에 사용하기 전에 미리 어떤 속성을 private 속성으로 사용하겠다고 선언해야 한다!!
+        #length;
+
+        constructor(length) {
+          if (length <= 0) {
+            throw "길이는 0보다 커야 합니다.";
+          }
+          this.#length = length;
+        }
+
+        getPerimeter() {
+          return 4 * this.#length;
+        }
+
+        getArea() {
+          return this.#length * this.#length;
+        }
+      }
+
+      const square3 = new Square2(10);
+      // square3.#length = -10;
+      // private 속성으로 변경하면 클래스 외부에서는 해당 속성에 접근할 수 없으므로 오류가 발생한다. (빨간 줄 생겨서 주석 처리함)
+
+      square3.length = -10;
+      // 이렇게 변경을 시도했을 때 오류가 나지 않는 이유는 현재 클래스 내부에서 사용하고 있는 속성이 #length지 length가 아니기 때문이다.
+
+      console.log(`정사각형의 둘레: ${square3.getPerimeter()}`);
+      console.log(`정사각형의 넓이: ${square3.getArea()}`);
+
+      // 그러나 private 속성은 외부에서 아예 접근을 할 수가 없기 때문에 square 객체의 length 속성이 현재 몇인지를 확인하는 것조차 할 수 없다. 그래서 상황에 따라 속성을 읽고 쓸 수 있는 메소드가 제공되었다.
+
+      class Square3 {
+        #length;
+
+        constructor(length) {
+          this.setLength(length);
+        }
+
+        // setㅇㅇ()의 형태로 속성에 값을 지정하는 메소드를 '세터'
+        setLength(value) {
+          if (value <= 0) {
+            throw "길이는 0보다 커야 합니다.";
+          }
+          this.#length = value;
+        }
+
+        // getㅇㅇ()의 형태로 속성 값을 확인하는 메소드를 '게터'
+        getLength(value) {
+          return this.#length;
+        }
+
+        getPerimeter() {
+          return 4 * this.#length;
+        }
+
+        getArea() {
+          return this.#length * this.#length;
+        }
+      }
+
+      const square4 = new Square3(10);
+      console.log(`한 변의 길이는 ${square4.getLength()}입니다.`);
+
+      square4.setLength(20);
+      console.log(`한 변의 길이는 ${square4.getLength()}입니다.`);
+
+      square4.setLength(-10);
+
+      // 게터와 세터 메소드를 많이 사용하자 코드를 더 쉽게 작성할 수 있도록 get과 set 키워드 문법이 제공되었다.
+
+      class Square4 {
+        #length;
+
+        constructor(length) {
+          // this.length에 값을 지정하면 set length (length) 메소드가 호출된다
+          this.length = length;
+        }
+
+        set length(length) {
+          if (length <= 0) {
+            throw "길이는 0보다 커야 합니다.";
+          }
+          this.#length = length;
+        }
+
+        get length() {
+          return this.#length;
+        }
+
+        get perimeter() {
+          return 4 * this.#length;
+        }
+
+        get area() {
+          return this.#length * this.#length;
+        }
+      }
+
+      const squareA = new Square4(10);
+      console.log(`한 변의 길이: ${squareA.length}`);
+      console.log(`둘레: ${squareA.perimeter}`);
+      console.log(`넓이: ${squareA.area}`);
+      // 생성 시에는 크게 차이가 없지만 클래스를 활용할 때 훨씬 코드가 단순해지는 효과가 있다.
+
+      const squareB = new Square4(-10);
+    </script>
+  </head>
+  <body></body>
+</html>
