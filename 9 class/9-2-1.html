@@ -51,6 +51,11 @@
         constructor(length) {
           super(length, length);
           // super() 함수는 부모의 생성자 함수를 호출한다. https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/super
+
+          // 아래와 같이 작성해도 된다. 이렇게 코드를 짤 경우, 이 클래스가 부모로부터 상속받은 클래스임을 생성자에서 명시하기 위해서 앞쪽에 super() 함수를 호출시켜야 한다.
+          // super();
+          // this.width = length;
+          // this.height = length;
         }
       }
 
