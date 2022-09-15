@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>루트 컴포넌트 출력하기</title>
+    <!-- 리액트를 사용하기 위한 준비 -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- 리액트를 사용하는 코드 입력 -->
+    <script type="text/babel">
+      // h1 컴포넌트 생성.
+      const component = <h1>리액트 기본</h1>;
+      // 자바스크립트 코드 내부에 HTML 코드를 사용하는 문법을 JSX(자바스크립트 확장 문법)이라고 부른다. 웹 브라우저가 JSX 코드를 읽어서 실행하는 건 아니고, 바벨이 JSX 코드를 일반적인 자바스크립트 문법으로 변환한 뒤 실행하기 때문에 JSX를 사용할 수 있는 것이다.
+
+      // h1 컴포넌트를 출력할 div#root를 추출
+      const container1 = document.getElementById("root");
+
+      // 컴포넌트 출력
+      ReactDOM.render(component, container1);
+
+      /* 같은 내용을 클래스 컴포넌트로 구현 시 */
+
+      // React.Component 클래스의 상속을 받아 속성과 메소드를 받아와야 컴포넌트로서 동작이 가능
+      class App extends React.Component {
+        // 화면에 무언가를 출력할 때 render() 메소드를 사용하는데, 이를 오버라이드해서 원하는 내용을 출력한다.
+        render() {
+          return <h1>리액트 기본</h1>;
+        }
+      }
+
+      // 오류 떠서 컨테이너에 번호 붙였고 실제로는 위아래 코드 같이 못 씀
+      const container2 = document.getElementById("root");
+      ReactDOM.render(<App />, container2);
+    </script>
+  </body>
+</html>
