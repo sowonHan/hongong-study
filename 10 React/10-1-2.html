@@ -18,10 +18,7 @@
           <img src={imgUrl} />
         </div>
       );
-
-      const container1 = document.getElementById("root");
-
-      ReactDOM.render(component, container);
+      // 출력코드는 아래와 거의 겹쳐서 생략
 
       /* 클래스 컴포넌트의 속성 사용하기 */
 
@@ -36,7 +33,7 @@
         }
       }
 
-      const container2 = document.getElementById("root");
+      const container = document.getElementById("root");
       ReactDOM.render(<App name="구름" imgUrl="http://placedog.net/400/200" />);
     </script>
   </body>
