@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10-1절 확인문제 5번</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // 입력 반영과 단위 변환이 제대로 안 돼서 망한 내 코드ㅠㅠ........
+      // class App extends React.Component {
+      //   constructor(props) {
+      //     super(props);
+      //     this.state = {
+      //       number: 0,
+      //       changeValue: 10,
+      //       errorText: "",
+      //       result: 0,
+      //     };
+      //   }
+
+      //   render() {
+      //     const pStyle = { color: "red" };
+
+      //     return (
+      //       <div>
+      //         <input type="text" onChange={this.insert} /> cm =
+      //         <span>{this.state.result}</span>
+      //         <select onChange={this.chooseUnit}>
+      //           <option value="10">mm</option>
+      //           <option value="0.01">m</option>
+      //           <option value="0.393701">inch</option>
+      //         </select>
+      //         <p style={pStyle}>{this.state.errorText}</p>
+      //       </div>
+      //     );
+      //   }
+
+      //   calculate = () => {
+      //     this.setState({
+      //       result: (this.state.number * this.state.changeValue).toFixed(2),
+      //     });
+      //   };
+
+      //   insert = (event) => {
+      //     this.setState({
+      //       number: Number(event.target.value),
+      //     });
+      //     console.log("테스트" + this.state.number);
+      //     if (isNaN(this.state.number)) {
+      //       this.setState({
+      //         errorText: "숫자를 입력해주세요.",
+      //       });
+      //       return;
+      //     }
+
+      //     this.setState({
+      //       errorText: "",
+      //     });
+
+      //     this.calculate();
+      //   };
+
+      //   chooseUnit = (event) => {
+      //     const options = event.currentTarget.options;
+      //     const index = event.currentTarget.options.selectedIndex;
+
+      //     this.setState({
+      //       changeValue: Number(options[index].value),
+      //     });
+
+      //     this.calculate();
+      //   };
+      // }
+
+      // 교재 내 정답 코드
+      class App extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            input: 0,
+            output: 0,
+            scale: 10,
+            alert: "",
+          };
+        }
+
+        handleInput = (event) => {
+          // 교재 120p와 267p 참고. 숫자 연산자 - * /를 사용하면 다른 자료형이 숫자 자료형으로 변환되기 때문에, input의 value가 문자열 자료형이어도 계산이 된다. (여기서는 사용할 일이 없지만 참고로 +는 숫자 연산자가 아닌 문자열 연결 연산자로 인식되어 오히려 scale 값이 문자열 자료형으로 변환되어 버린다.) 그런데 toFixed()는 Number 객체의 메소드지만 출력값은 문자열의 형태로 변환되므로, output은 문자열 자료형인 것.
+          const output = (event.target.value * this.state.scale).toFixed(2);
+
+          this.setState({
+            input: event.target.value,
+            output: output,
+          });
+        };
+
+        handleSelect = (event) => {
+          const output = (this.state.input * event.target.value).toFixed(2);
+          this.setState({
+            scale: event.target.value,
+            output: output,
+          });
+        };
+
+        // select 태그의 value가 정답지에는 {this.state.value}로 되어있는데 왜 그런지 전혀 이해 못했고 {this.state.scale}로 바꾸거나 아예 value 속성을 지워도 딱히 차이는 없음.....
+        render() {
+          return (
+            <div>
+              <input value={this.state.input} onChange={this.handleInput} />
+              <span>cm = {this.state.output}</span>
+              <select onChange={this.handleSelect}>
+                <option defaultValue value={10}>
+                  mm
+                </option>
+                <option value={0.01}>m</option>
+                <option value={0.393701}>inch</option>
+              </select>
+            </div>
+          );
+        }
+      }
+
+      const container = document.getElementById("root");
+      ReactDOM.render(<App />, container);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10-1절 확인문제 4번</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            timer: 0,
+          };
+        }
+
+        timerRun = (event) => {
+          // 여기서는 이벤트 리스너(핸들러)가 달려있는 컴포넌트(요소)와 실제 이벤트가 발생하는 컴포넌트가 일치하기 때문에 target을 쓰든 currentTarget을 쓰든 오류가 뜨지 않는다.
+          if (event.currentTarget.checked) {
+            this.timerId = setInterval(() => {
+              this.setState({
+                timer: this.state.timer + 1,
+              });
+            }, 1000);
+          } else {
+            clearInterval(this.timerId);
+          }
+        };
+
+        timerReset = (event) => {
+          this.setState({ timer: 0 });
+        };
+
+        render() {
+          return (
+            <div>
+              <input type="checkbox" onClick={this.timerRun} />
+              <span>타이머 활성화</span>
+              <h1>{this.state.timer}초</h1>
+              <button onClick={this.timerReset}>타이머 초기화</button>
+            </div>
+          );
+        }
+      }
+
+      const container = document.getElementById("root");
+      ReactDOM.render(<App />, container);
+    </script>
+  </body>
+</html>

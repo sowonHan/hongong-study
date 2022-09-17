@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>입력양식 이벤트와 스타일 지정</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            text: "",
+            checked: false,
+          };
+        }
+
+        render() {
+          const textStyle = {
+            color: this.state.checked ? "blue" : "red",
+          };
+
+          return (
+            <div>
+              <input value={this.state.text} onChange={this.handleChange} />
+              <h1>{this.state.text}</h1>
+              <input type="checkbox" onClick={this.handleClick} />
+              <h1 style={textStyle}>글자</h1>
+            </div>
+          );
+        }
+
+        handleChange = (event) => {
+          this.setState({
+            // 이벤트가 발생할 때 text 속성에 입력양식(여기서는 input)의 값인 value를 넣는 코드
+            text: event.target.value,
+          });
+        };
+
+        handleClick = (event) => {
+          this.setState({
+            // 7-2-6
+            checked: event.target.checked,
+          });
+          /* 7-2-8에서도 찾아봤지만 또 달기...target과 currentTarget의 차이
+          https://kyounghwan01.github.io/blog/JS/JSbasic/target-currentTarget/
+          https://velog.io/@edie_ko/JavaScript-event-target%EA%B3%BC-currentTarget%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90 */
+        };
+      }
+
+      const container = document.getElementById("root");
+      ReactDOM.render(<App />, container);
+    </script>
+  </body>
+</html>

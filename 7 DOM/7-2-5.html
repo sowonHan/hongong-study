@@ -39,6 +39,8 @@
           const index = event.currentTarget.options.selectedIndex;
 
           변환상수 = Number(options[index].value);
+          // 10-1절 확인문제 풀고 오니까 이것도 그냥 아래처럼 해도 되고 위 코드처럼 지저분하게 할 필요가 없었다......
+          // 변환상수 = Number(event.target.value);
 
           calculate();
         });
