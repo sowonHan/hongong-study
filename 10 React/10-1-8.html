@@ -86,11 +86,20 @@
             input: 0,
             output: 0,
             scale: 10,
-            alert: "",
+            text: "",
           };
         }
 
         handleInput = (event) => {
+          const confirm = Number(event.target.value);
+
+          if (isNaN(confirm)) {
+            this.setState({
+              text: "숫자를 입력해주세요.",
+            });
+            return;
+          }
+
           // 교재 120p와 267p 참고. 숫자 연산자 - * /를 사용하면 다른 자료형이 숫자 자료형으로 변환되기 때문에, input의 value가 문자열 자료형이어도 계산이 된다. (여기서는 사용할 일이 없지만 참고로 +는 숫자 연산자가 아닌 문자열 연결 연산자로 인식되어 오히려 scale 값이 문자열 자료형으로 변환되어 버린다.) 그런데 toFixed()는 Number 객체의 메소드지만 출력값은 문자열의 형태로 변환되므로, output은 문자열 자료형인 것.
           const output = (event.target.value * this.state.scale).toFixed(2);
 
@@ -110,6 +119,10 @@
 
         // select 태그의 value가 정답지에는 {this.state.value}로 되어있는데 왜 그런지 전혀 이해 못했고 {this.state.scale}로 바꾸거나 아예 value 속성을 지워도 딱히 차이는 없음.....
         render() {
+          const pStyle = {
+            color: "red",
+          };
+
           return (
             <div>
               <input value={this.state.input} onChange={this.handleInput} />
@@ -121,6 +134,7 @@
                 <option value={0.01}>m</option>
                 <option value={0.393701}>inch</option>
               </select>
+              <p style={pStyle}>{this.state.text}</p>
             </div>
           );
         }

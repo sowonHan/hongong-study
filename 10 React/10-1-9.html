@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10-1절 확인문제 6번</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // 내 코드
+      class App1 extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            length: 0,
+          };
+        }
+
+        countStart = (event) => {
+          this.timerId = setInterval(() => {
+            this.setState({ length: event.target.value.length });
+          }, 50);
+        };
+
+        countEnd = (event) => {
+          clearInterval(this.timerId);
+        };
+
+        render() {
+          return (
+            <div>
+              <h1>글자 수 : {this.state.length}</h1>
+              <textarea
+                onFocus={this.countStart}
+                onBlur={this.countEnd}
+              ></textarea>
+            </div>
+          );
+        }
+      }
+
+      // 교재 내 정답 코드
+      class App2 extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            text: "",
+            length: 0,
+          };
+        }
+
+        handleChange = (event) => {
+          this.setState({ text: event.target.value });
+        };
+
+        componentDidMount() {
+          this.timerId = setInterval(() => {
+            this.setState({
+              length: this.state.text.length,
+            });
+          }, 50);
+        }
+
+        componentWillUnmount() {
+          clearInterval(this.timerId);
+        }
+
+        render() {
+          return (
+            <div>
+              <h1>글자 수 : {this.state.length}</h1>
+              <textarea
+                value={this.state.text}
+                onChange={this.handleChange}
+              ></textarea>
+            </div>
+          );
+        }
+      }
+
+      const container = document.getElementById("root");
+      ReactDOM.render(<App1 />, container);
+    </script>
+  </body>
+</html>
