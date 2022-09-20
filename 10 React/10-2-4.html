@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>리액트로 투두리스트 만들기</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor(props) {
+          super(props);
+          // 지난 설정 불러오기
+          this.state = this.load();
+        }
+
+        save() {
+          // 속성 전체를 읽어들이기 (JSON 메소드는 6-2-2 참고)
+          localStorage.state = JSON.stringify(this.state);
+        }
+
+        load() {
+          let output;
+
+          try {
+            output = JSON.parse(localStorage.state);
+          } catch (e) {}
+
+          if (
+            output !== undefined &&
+            output.keyCount !== undefined &&
+            output.currentValue !== undefined
+          ) {
+            output = JSON.parse(localStorage.state);
+          } else {
+            // 속성이 없거나 제대로 되어있지 않을 시 초깃값 할당
+            output = {
+              keyCount: 0,
+              currentValue: "",
+              todos: [],
+            };
+          }
+          return output;
+        }
+
+        componentDidUpdate() {
+          this.save();
+        }
+
+        render() {
+          return (
+            <div>
+              <h1>할 일 목록</h1>
+              <input
+                value={this.state.currentValue}
+                onChange={this.textChange}
+                onKeyDown={this.textKeyDown}
+              />
+              <button onClick={this.buttonClick}>추가하기</button>
+              <div>
+                {this.state.todos.map((todo) => {
+                  return (
+                    <TodoItem
+                      dataKey={todo.key}
+                      isDone={todo.isDone}
+                      text={todo.text}
+                      removeItem={this.removeItem}
+                      changeCheckData={this.changeCheckData}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          );
+        }
+
+        textChange = (event) => {
+          this.setState({
+            currentValue: event.target.value,
+          });
+        };
+
+        textKeyDown = (event) => {
+          const ENTER = 13;
+          if (event.keyCode === ENTER) {
+            this.buttonClick();
+          }
+        };
+
+        buttonClick = (event) => {
+          if (this.state.currentValue.trim() !== "") {
+            this.setState({
+              // 전개연산자를 활용해서 기존의 배열을 복사하고 뒤에 요소를 추가
+              todos: [
+                ...this.state.todos,
+                {
+                  key: this.state.keyCount.toString(),
+                  isDone: false,
+                  text: this.state.currentValue,
+                },
+              ],
+            });
+            this.state.keyCount += 1;
+            this.state.currentValue = "";
+          }
+        };
+
+        removeItem = (key) => {
+          this.setState({
+            todos: this.state.todos.filter((todo) => {
+              return todo.key !== key;
+            }),
+          });
+        };
+
+        changeCheckData = (key, changed) => {
+          // 배열을 전개연산자로 복사
+          let target = [...this.state.todos];
+          // 변경된 요소를 찾고, isDone 속성을 변경
+          target.filter((todo) => todo.key === key)[0].isDone = changed;
+          this.setState({
+            todos: target,
+          });
+        };
+      }
+
+      class TodoItem extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            isDone: props.isDone,
+          };
+        }
+
+        render() {
+          const textStyle = {};
+          textStyle.textDecoration = this.state.isDone ? "line-through" : "";
+
+          return (
+            <div style={textStyle}>
+              <input
+                type="checkbox"
+                checked={this.state.isDone}
+                onChange={this.checkboxClick}
+              />
+              <span>{this.props.text}</span>
+              <button onClick={() => this.props.removeItem(this.props.dataKey)}>
+                제거
+              </button>
+            </div>
+          );
+        }
+
+        checkboxClick = () => {
+          const changed = !this.state.isDone;
+          this.props.changeCheckData(this.props.dataKey, changed);
+        };
+
+        componentDidUpdate(prevProps) {
+          // isDone 속성이 부모로부터 변경되면 출력에 반영
+          if (prevProps.isDone !== this.props.isDone) {
+            this.setState({
+              isDone: this.props.isDone,
+            });
+          }
+        }
+      }
+
+      const container = document.getElementById("root");
+      ReactDOM.render(<App />, container);
+    </script>
+  </body>
+</html>
